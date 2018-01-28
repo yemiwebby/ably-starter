@@ -1,0 +1,8 @@
+{
+  "name": "ably-starter",
+  "version": "1.0.0",
+  "description": "A very simple project for realtime",
+  "main": "index.js",
+  "author": "yemiwebby",
+  "license": "MIT"
+}

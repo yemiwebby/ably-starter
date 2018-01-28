@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Ably Starter</title>
+</head>
+<body>
+
+    <div>
+        <p>
+            <button id="js-start-chat"></button>
+        </p>
+
+        <p id="js-message-box">
+
+        </p>
+    </div>
+    
+    <script src="https://cdn.ably.io/lib/ably.min-1.js"></script>
+    <script>
+
+        let button = document.getElementById('js-start-chat');
+        let messageBox = document.getElementById('js-message-box');
+
+        var ably = new Ably.Realtime('C0d5-w.eiJTaw:P_eRKDclpXwA3jZu');
+        ably.connection.on('connected', ()  => {
+            button.innerHTML = "Connected!! You can now start chatting";
+            // console.log("That was very simple, you are now connected to Ably Realtime")
+        });
+
+        var channel = ably.channels.get('quickstart');
+        channel.subscribe('greet', (message) =>  {
+            messageBox.innerHTML = "Oluyemi just publish a message : " + message.data; 
+            // alert("Received a greeting message in realtime: " + message.data);
+        });
+
+        var channel = ably.channels.get('quickstart');
+        button.addEventListener('click', () =>  {
+            channel.publish('greet', 'Hello!');
+        });
+    </script>
+</body>
+</html>
